@@ -86,8 +86,11 @@
                  (str original-result " " (format "chained-values-for-a-%s-b-%d-c-%d-d-%d" a b c d)))))
 
     (is (= "original-values-for-a-aaa-b-1-c-2-d-3 chained-values-for-a-aaa-b-1-c-2-d-3" (wrap-fn-original-arity-1-and-optional-keys "aaa" :b 1 :c 2 :d 3))))
+  )
 
-
-
+(deftest test-recorder
+  (wrap-fn #'client/request #'recorder)
+  (client/get "http://google.com" {:accept :json :throw-exceptions false})
+  (is (request-recorded? {:url "http://google.com" :method :get :accept :json :throw-exceptions false}))
   )
 
