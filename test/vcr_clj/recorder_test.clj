@@ -12,10 +12,8 @@
     (record-request! store :k "value")
     (is (request-recorded? store :k))))
 
-
 (deftest request-recorded-test
   (let [store (vcr-memory-store)]
     (record-request! store :k "value")
     (clear-recorded! store)
     (is (= @(get-all store) {}))))
-

@@ -27,7 +27,10 @@
 
   (get-all
     [_]
-    store-map))
+    store-map)
+
+  (dump-tp-disk! [_ options]
+    (some #(= options %) (keys @store-map))))
 
 (defn vcr-memory-store
   ([] (vcr-memory-store (atom {})))
